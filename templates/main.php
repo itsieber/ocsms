@@ -132,7 +132,7 @@ use \OCA\Ocsms\Lib\CountryCodes;
 					<div v-bind:class="['msg-'+  message.type]">
 						<div v-html="message.content"></div>
 						<div style="display: block;" id="ocsms-message-removal" class="icon-delete svn delete action" v-on:click="removeConversationMessage(message.id);"></div>
-						<div class="msg-date">{{ message.date | date:'medium' }}</div>
+						<div class="msg-date">{{ message.date | date('medium') }}</div>
 					</div>
 					<div class="msg-spacer"></div>
 				</div>
