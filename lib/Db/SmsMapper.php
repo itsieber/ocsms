@@ -42,7 +42,7 @@ class SmsMapper {
 		$result = $qb->executeQuery();
 
 		$smsList = [];
-		while ($row = $result->fetchAssociative()) {
+		while ($row = $result->fetch()) {
 			if (!array_key_exists((int)$row['sms_mailbox'], self::$mailboxNames)) {
 				continue;
 			}
@@ -55,7 +55,7 @@ class SmsMapper {
 				$smsList[$mbox][] = $row['sms_id'];
 			}
 		}
-		$result->free();
+		$result->closeCursor();
 		return $smsList;
 	}
 
@@ -66,8 +66,8 @@ class SmsMapper {
 			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($userId)));
 		$result = $qb->executeQuery();
 
-		$row = $result->fetchAssociative();
-		$result->free();
+		$row = $result->fetch();
+		$result->closeCursor();
 
 		if ($row && $row['mx'] !== null) {
 			return (int)$row['mx'];
@@ -88,13 +88,13 @@ class SmsMapper {
 		$result = $qb->executeQuery();
 
 		$phoneList = [];
-		while ($row = $result->fetchAssociative()) {
+		while ($row = $result->fetch()) {
 			$pn = $row['sms_address'];
 			if (!in_array($pn, $phoneList)) {
 				$phoneList[] = $pn;
 			}
 		}
-		$result->free();
+		$result->closeCursor();
 		return $phoneList;
 	}
 
@@ -109,7 +109,7 @@ class SmsMapper {
 		$result = $qb->executeQuery();
 
 		$phoneList = [];
-		while ($row = $result->fetchAssociative()) {
+		while ($row = $result->fetch()) {
 			$pn = $row['sms_address'];
 			$fmtPN = PhoneNumberFormatter::format($country, $pn);
 			if (!isset($phoneList[$fmtPN])) {
@@ -120,7 +120,7 @@ class SmsMapper {
 			}
 			$phoneList[$fmtPN][$pn] += 1;
 		}
-		$result->free();
+		$result->closeCursor();
 
 		$fpn = $phoneNumber;
 		if (isset($phoneList[$fpn])) {
@@ -151,13 +151,13 @@ class SmsMapper {
 				));
 			$result = $qb->executeQuery();
 
-			while ($row = $result->fetchAssociative()) {
+			while ($row = $result->fetch()) {
 				$messageList[$row['sms_date']] = [
 					'msg' => $row['sms_msg'],
 					'type' => $row['sms_type']
 				];
 			}
-			$result->free();
+			$result->closeCursor();
 		}
 		return $messageList;
 	}
@@ -169,8 +169,8 @@ class SmsMapper {
 			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($userId)));
 		$result = $qb->executeQuery();
 
-		$row = $result->fetchAssociative();
-		$result->free();
+		$row = $result->fetch();
+		$result->closeCursor();
 
 		if ($row) {
 			return (int)$row['count'];
@@ -193,7 +193,7 @@ class SmsMapper {
 			->setMaxResults($limit);
 		$result = $qb->executeQuery();
 
-		while ($row = $result->fetchAssociative()) {
+		while ($row = $result->fetch()) {
 			$messageList[$row['sms_date']] = [
 				'address' => $row['sms_address'],
 				'mailbox' => (int)$row['sms_mailbox'],
@@ -201,7 +201,7 @@ class SmsMapper {
 				'type' => (int)$row['sms_type']
 			];
 		}
-		$result->free();
+		$result->closeCursor();
 		return $messageList;
 	}
 
@@ -220,8 +220,8 @@ class SmsMapper {
 				));
 			$result = $qb->executeQuery();
 
-			$row = $result->fetchAssociative();
-			$result->free();
+			$row = $result->fetch();
+			$result->closeCursor();
 
 			if ($row) {
 				$cnt += (int)$row['ct'];
@@ -297,7 +297,7 @@ class SmsMapper {
 		$result = $qb->executeQuery();
 
 		$phoneList = [];
-		while ($row = $result->fetchAssociative()) {
+		while ($row = $result->fetch()) {
 			$phoneNumber = preg_replace('#[ ]#', '', $row['sms_address']);
 			if (!array_key_exists($phoneNumber, $phoneList)) {
 				$phoneList[$phoneNumber] = $row['mx'];
@@ -305,7 +305,7 @@ class SmsMapper {
 				$phoneList[$phoneNumber] = $row['mx'];
 			}
 		}
-		$result->free();
+		$result->closeCursor();
 		return $phoneList;
 	}
 
@@ -325,7 +325,7 @@ class SmsMapper {
 		$result = $qb->executeQuery();
 
 		$phoneList = [];
-		while ($row = $result->fetchAssociative()) {
+		while ($row = $result->fetch()) {
 			$phoneNumber = preg_replace('#[ ]#', '', $row['sms_address']);
 			if ($this->convStateMapper->getLastForPhoneNumber($userId, $phoneNumber) < $ld) {
 				if (!array_key_exists($phoneNumber, $phoneList)) {
@@ -335,7 +335,7 @@ class SmsMapper {
 				}
 			}
 		}
-		$result->free();
+		$result->closeCursor();
 		return $phoneList;
 	}
 

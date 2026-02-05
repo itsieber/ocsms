@@ -30,8 +30,8 @@ class ConversationStateMapper {
 			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($userId)));
 		$result = $qb->executeQuery();
 
-		$row = $result->fetchAssociative();
-		$result->free();
+		$row = $result->fetch();
+		$result->closeCursor();
 
 		if ($row && $row['mx'] !== null) {
 			return (int)$row['mx'];
@@ -50,8 +50,8 @@ class ConversationStateMapper {
 			));
 		$result = $qb->executeQuery();
 
-		$row = $result->fetchAssociative();
-		$result->free();
+		$row = $result->fetch();
+		$result->closeCursor();
 
 		if ($row && $row['mx'] !== null) {
 			return (int)$row['mx'];
@@ -94,11 +94,11 @@ class ConversationStateMapper {
 			->where($qb->expr()->like('datakey', $qb->createNamedParameter('lastReadDate-%')));
 
 		$result = $qb->executeQuery();
-		while ($row = $result->fetchAssociative()) {
+		while ($row = $result->fetch()) {
 			$pn = preg_replace('#lastReadDate[-]#', '', $row['datakey']);
 			$this->setLast($row['user_id'], $pn, (int)$row['datavalue']);
 		}
-		$result->free();
+		$result->closeCursor();
 
 		$qb = $this->db->getQueryBuilder();
 		$qb->delete('ocsms_user_datas')
