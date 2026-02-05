@@ -53,10 +53,10 @@ use \OCA\Ocsms\Lib\CountryCodes;
                 <?php p($l->t('No contact found.'));?>
             </div>
             <ul class="contact-list" v-if="orderedContacts.length > 0 && !isContactsLoading">
-                <li v-for="contact in orderedContacts" peer-label="{{ contact.label }}" v-on:click="loadConversation(contact);" href="#">
+                <li v-for="contact in orderedContacts" :key="contact.nav" :peer-label="contact.label" v-on:click="loadConversation(contact);">
                     <img class="ocsms-plavatar" :src="contact.avatar" v-if="contact.avatar !== undefined" />
-                    <div class="ocsms-plavatar" v-if="contact.avatar === undefined" v-bind:style="{'backgroundColor': getContactColor(contact.uid) }">{{ contact.label | firstCharacter }}</div>
-                    <a class="ocsms-plname" style="{{ contact.unread > 0 ? 'font-weight:bold;' : ''}}" mailbox-label="{{ contact.label }}" mailbox-navigation="{{ contact.nav }}">{{ contact.label }}{{ contact.unread > 0 ? ' (' + contact.unread + ') ' : '' }}</a>
+                    <div class="ocsms-plavatar" v-if="contact.avatar === undefined" :style="{'backgroundColor': getContactColor(contact.uid) }">{{ contact.label | firstCharacter }}</div>
+                    <a class="ocsms-plname" :style="{'fontWeight': contact.unread > 0 ? 'bold' : 'normal'}" :mailbox-label="contact.label" :mailbox-navigation="contact.nav">{{ contact.label }}{{ contact.unread > 0 ? ' (' + contact.unread + ') ' : '' }}</a>
                 </li>
             </ul>
         </div>
