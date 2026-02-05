@@ -93,7 +93,12 @@ class SmsController extends Controller {
 	 * @NoCSRFRequired
 	 */
 	public function retrieveAllPeers(): JSONResponse {
-		$phoneList = $this->smsMapper->getLastMessageTimestampForAllPhonesNumbers($this->userId ?? '');
+		$userId = $this->userId ?? '';
+		\OC::$server->getLogger()->warning("OCSMS Debug: userId = '$userId'");
+		
+		$phoneList = $this->smsMapper->getLastMessageTimestampForAllPhonesNumbers($userId);
+		\OC::$server->getLogger()->warning("OCSMS Debug: phoneList count = " . count($phoneList));
+		
 		$contactsSrc = $this->contactCache->getContacts();
 		$contacts = [];
 		$photos = $this->contactCache->getContactPhotos();
