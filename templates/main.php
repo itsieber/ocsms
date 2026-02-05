@@ -1,5 +1,5 @@
 <?php
-use \OCA\OcSms\Lib\CountryCodes;
+use \OCA\Ocsms\Lib\CountryCodes;
 
 \OCP\Util::addStyle('ocsms', 'style');
 \OCP\Util::addScript('ocsms', 'lodash.min');
