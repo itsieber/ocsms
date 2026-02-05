@@ -15,7 +15,8 @@ var ContactList = new Vue({
 		contacts: [],
 		lastRetrievedMessageDate: 0,
 		totalUnreadMessages: 0,
-		lastTotalUnreadCount: 0
+		lastTotalUnreadCount: 0,
+		searchQuery: ''
 	},
 	created: function () {
 		this.reset();
@@ -212,7 +213,17 @@ var ContactList = new Vue({
 	},
 	computed: {
 		orderedContacts: function () {
-			return _.orderBy(this.contacts, [SmsSettings.contactOrderBy], [SmsSettings.reverseContactOrder ? 'desc' : 'asc'])
+			var self = this;
+			var filtered = this.contacts;
+			if (this.searchQuery && this.searchQuery.trim() !== '') {
+				var query = this.searchQuery.toLowerCase().trim();
+				filtered = this.contacts.filter(function (contact) {
+					var labelMatch = contact.label && contact.label.toLowerCase().indexOf(query) !== -1;
+					var navMatch = contact.nav && contact.nav.toLowerCase().indexOf(query) !== -1;
+					return labelMatch || navMatch;
+				});
+			}
+			return _.orderBy(filtered, [SmsSettings.contactOrderBy], [SmsSettings.reverseContactOrder ? 'desc' : 'asc'])
 		}
 	}
 });

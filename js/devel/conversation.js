@@ -16,7 +16,9 @@ var Conversation = new Vue({
 		messages: [],
 		lastConvMessageDate: 0,
 		totalMessageCount: 0,
-		refreshIntervalId: null
+		refreshIntervalId: null,
+		newMessage: '',
+		isSending: false
 	},
 	methods: {
 		fetch: function (contact) {
@@ -125,7 +127,7 @@ var Conversation = new Vue({
 						'id': id,
 						'type': msgClass,
 						'date': new Date(id * 1),
-						'content': twemoji.parse(anchorme(escapeHTML(vals['msg'])), twemojiOptions)
+						'content': twemoji.parse(anchorme(escapeHTML(vals['msg']), { attributes: { target: '_blank' } }), twemojiOptions)
 					});
 					buf = true;
 					msgCount++;
@@ -174,9 +176,40 @@ var Conversation = new Vue({
 			ContactList.removeContact(this.selectedContact);
 			this.messages = [];
 			this.selectedContact = {};
+			this.newMessage = '';
 			OC.Util.History.pushState('');
 			clearInterval(this.refreshIntervalId);
 			this.refreshIntervalId = null;
+		},
+		sendMessage: function () {
+			var self = this;
+			var message = this.newMessage.trim();
+
+			if (message === '' || this.isSending) {
+				return;
+			}
+
+			var phoneNumber = this.selectedContact.nav;
+			if (!phoneNumber) {
+				return;
+			}
+
+			this.isSending = true;
+
+			$.post(Sms.generateURL('/front-api/v1/send'),
+				{
+					'phoneNumber': phoneNumber,
+					'message': message
+				},
+				function (data) {
+					self.isSending = false;
+					if (data.status === 'ok') {
+						self.newMessage = '';
+					}
+				}
+			).fail(function () {
+				self.isSending = false;
+			});
 		}
 	},
 	computed: {

@@ -47,6 +47,9 @@ use \OCA\Ocsms\Lib\CountryCodes;
 <div id="app">
     <div id="app-navigation">
         <div id="app-mailbox-peers">
+            <div id="app-contact-search">
+                <input type="text" v-model="searchQuery" placeholder="<?php p($l->t('Search contact...'));?>" class="contact-search-input" />
+            </div>
             <div id="app-contacts-loader" class="icon-loading" v-if="isContactsLoading">
             </div>
             <div class="contact-list-no-contact" v-if="orderedContacts.length === 0 && !isContactsLoading">
@@ -136,7 +139,13 @@ use \OCA\Ocsms\Lib\CountryCodes;
 					</div>
 					<div class="msg-spacer"></div>
 				</div>
-<!--				<div id="searchresults"></div>-->
+			</div>
+			<div v-if="messages.length > 0" id="ocsms-send-container">
+				<textarea id="ocsms-send-message" v-model="newMessage" :placeholder="'<?php p($l->t('Type a message...'));?>'" @keydown.enter.exact.prevent="sendMessage()"></textarea>
+				<button id="ocsms-send-button" class="primary" v-on:click="sendMessage()" :disabled="isSending">
+					<span v-if="!isSending"><?php p($l->t('Send'));?></span>
+					<span v-if="isSending" class="icon-loading-small"></span>
+				</button>
 			</div>
 		</div>
 	</div>

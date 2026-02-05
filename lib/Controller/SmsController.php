@@ -24,6 +24,7 @@ use OCP\AppFramework\Http;
 
 use OCA\Ocsms\Db\ConfigMapper;
 use OCA\Ocsms\Db\SmsMapper;
+use OCA\Ocsms\Db\SendQueueMapper;
 use OCA\Ocsms\Db\ConversationStateMapper;
 use OCA\Ocsms\Lib\ContactCache;
 use OCA\Ocsms\Lib\PhoneNumberFormatter;
@@ -32,6 +33,7 @@ class SmsController extends Controller {
 	private ?string $userId;
 	private ConfigMapper $configMapper;
 	private SmsMapper $smsMapper;
+	private SendQueueMapper $sendQueueMapper;
 	private ConversationStateMapper $convStateMapper;
 	private IURLGenerator $urlGenerator;
 	private ContactCache $contactCache;
@@ -41,6 +43,7 @@ class SmsController extends Controller {
 		IRequest $request,
 		?string $userId,
 		SmsMapper $mapper,
+		SendQueueMapper $sendQueueMapper,
 		ConversationStateMapper $cmapper,
 		ConfigMapper $cfgMapper,
 		IContactsManager $contactsManager,
@@ -49,6 +52,7 @@ class SmsController extends Controller {
 		parent::__construct($appName, $request);
 		$this->userId = $userId;
 		$this->smsMapper = $mapper;
+		$this->sendQueueMapper = $sendQueueMapper;
 		$this->convStateMapper = $cmapper;
 		$this->configMapper = $cfgMapper;
 		$this->urlGenerator = $urlGenerator;
@@ -265,5 +269,24 @@ class SmsController extends Controller {
 	public function wipeAllUserMessages(): JSONResponse {
 		$this->smsMapper->removeAllMessagesForUser($this->userId ?? '');
 		return new JSONResponse(['status' => 'ok']);
+	}
+
+	/**
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 */
+	public function sendMessage(string $phoneNumber, string $message): JSONResponse {
+		$phoneNumber = trim($phoneNumber);
+		$message = trim($message);
+
+		if ($phoneNumber === '' || $message === '') {
+			return new JSONResponse(
+				['status' => 'error', 'msg' => 'Phone number and message are required'],
+				Http::STATUS_BAD_REQUEST
+			);
+		}
+
+		$messageId = $this->sendQueueMapper->addMessage($this->userId ?? '', $phoneNumber, $message);
+		return new JSONResponse(['status' => 'ok', 'id' => $messageId]);
 	}
 }

@@ -19,6 +19,25 @@ body.dark #app {
 	max-width: 300px;
 	height: calc(100vh - 50px);
 }
+/* Contact search */
+#app-contact-search {
+	padding: 10px;
+	border-bottom: 1px solid #eee;
+}
+
+.contact-search-input {
+	width: 100%;
+	padding: 8px 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+.contact-search-input:focus {
+	border-color: #0082c9;
+	outline: none;
+}
+
 /* Navigation: folder like structure */
 #app-mailbox-peers {
 	-webkit-user-select: none;
@@ -213,6 +232,39 @@ body.dark #app {
 
 .ocsms-messages-container {
         width: 100%;
+}
+
+#ocsms-send-container {
+	display: flex;
+	padding: 10px;
+	background-color: #f5f5f5;
+	border-top: 1px solid #ddd;
+	position: sticky;
+	bottom: 0;
+	gap: 10px;
+}
+
+#ocsms-send-message {
+	flex: 1;
+	min-height: 40px;
+	max-height: 120px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	resize: vertical;
+	font-family: inherit;
+	font-size: inherit;
+}
+
+#ocsms-send-message:focus {
+	border-color: #0082c9;
+	outline: none;
+}
+
+#ocsms-send-button {
+	min-width: 80px;
+	height: 40px;
+	align-self: flex-end;
 }
 
 .msg-spacer {
