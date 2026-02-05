@@ -32,6 +32,7 @@ class SettingsController extends Controller {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function getSettings(): JSONResponse {
 		$country = $this->configMapper->getKey('country');
