@@ -76,9 +76,8 @@ class Version030000Date20250205000000 extends SimpleMigrationStep {
 				'notnull' => true,
 				'length' => 512,
 			]);
-			$table->addColumn('sms_msg', 'string', [
+			$table->addColumn('sms_msg', 'text', [
 				'notnull' => true,
-				'length' => 10240,
 			]);
 			$table->addColumn('sms_date', 'bigint', [
 				'notnull' => true,
@@ -120,9 +119,8 @@ class Version030000Date20250205000000 extends SimpleMigrationStep {
 				'notnull' => true,
 				'length' => 64,
 			]);
-			$table->addColumn('sms_msg', 'string', [
+			$table->addColumn('sms_msg', 'text', [
 				'notnull' => true,
-				'length' => 2048,
 			]);
 			$table->setPrimaryKey(['id']);
 		}
