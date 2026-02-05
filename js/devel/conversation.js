@@ -127,7 +127,7 @@ var Conversation = new Vue({
 						'id': id,
 						'type': msgClass,
 						'date': new Date(id * 1),
-						'content': twemoji.parse(anchorme(escapeHTML(vals['msg']), { attributes: { target: '_blank' } }), twemojiOptions)
+						'content': twemoji.parse(anchorme(escapeHTML(vals['msg'])), twemojiOptions)
 					});
 					buf = true;
 					msgCount++;
