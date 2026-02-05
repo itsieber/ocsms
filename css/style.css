@@ -1,6 +1,7 @@
 #app {
 	display: flex;
-    width: 100%;
+	width: 100%;
+	height: calc(100vh - 50px);
 }
 
 body.dark #app {
@@ -12,7 +13,11 @@ body.dark #app {
 	border-left: 1px solid #ddd;
 	border-right: 1px solid #ddd;
 	overflow-x: auto;
-	flex: 1;
+	overflow-y: auto;
+	width: 300px;
+	min-width: 300px;
+	max-width: 300px;
+	height: calc(100vh - 50px);
 }
 /* Navigation: folder like structure */
 #app-mailbox-peers {
@@ -20,8 +25,9 @@ body.dark #app {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-	overflow-x: auto;
-	flex: 1;
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: calc(100% - 44px);
 }
 
 #app-mailbox-peers > ul {
@@ -60,6 +66,12 @@ body.dark #app {
 #ocsms-empty-peers {
 	color: #666;
 	text-align: center;
+}
+
+#app-content {
+	flex: 1;
+	overflow-y: auto;
+	height: calc(100vh - 50px);
 }
 
 #app-content-wrapper {
