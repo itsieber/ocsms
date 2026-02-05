@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OCA\Ocsms\Migration;
+namespace OCA\OcSms\Migration;
 
 use Closure;
 use OCP\DB\ISchemaWrapper;
@@ -10,9 +10,9 @@ use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
 
 /**
- * Auto-generated migration step: Please modify to your needs!
+ * Database schema migration for Phone Sync app
  */
-class Version020109Date20201216203338 extends SimpleMigrationStep {
+class Version030000Date20250205000000 extends SimpleMigrationStep {
 
 	/**
 	 * @param IOutput $output

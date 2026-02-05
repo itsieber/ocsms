@@ -7,12 +7,13 @@
     <description>An app to sync SMS with your cloud</description>
     <author>Loic Blot</author>
 		<author>e-alfred</author>
-    <version>2.2.0</version>
+    <version>3.0.0</version>
 		<licence>agpl</licence>
     <category>multimedia</category>
     <category>tools</category>
     <dependencies>
-        <nextcloud min-version="18" max-version="20" />
+        <php min-version="8.1" />
+        <nextcloud min-version="28" max-version="32" />
     </dependencies>
 
     <website>https://github.com/nextcloud/ocsms</website>
@@ -20,12 +21,9 @@
     <repository type="git">https://github.com/nextcloud/ocsms</repository>
     <screenshot small-thumbnail="https://raw.githubusercontent.com/nextcloud/ocsms/master/appinfo/screenshots/1-small.png">https://raw.githubusercontent.com/nextcloud/ocsms/master/appinfo/screenshots/1.png</screenshot>
 
-	<fulltextsearch>
-		<provider>OCA\OcSms\Provider\FullTextSearchProvider</provider>
-	</fulltextsearch>
     <repair-steps>
         <post-migration>
-			<step>OCA\OcSms\Migration\FixConversationReadStates</step>
+            <step>OCA\OcSms\Migration\FixConversationReadStates</step>
         </post-migration>
     </repair-steps>
 		<navigations>

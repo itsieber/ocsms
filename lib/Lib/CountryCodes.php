@@ -19,6 +19,8 @@
  * @copyright Loic Blot 2014-2017
  */
 
+declare(strict_types=1);
+
 namespace OCA\OcSms\Lib;
 
 class CountryCodes {

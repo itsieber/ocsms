@@ -10,14 +10,14 @@
  */
 
 
+declare(strict_types=1);
+
 namespace OCA\OcSms\Migration;
 
-use OCP\IUser;
 use OCP\IUserManager;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
-
-use \OCA\OcSms\Db\ConversationStateMapper;
+use OCA\OcSms\Db\ConversationStateMapper;
 
 class FixConversationReadStates implements IRepairStep {
 

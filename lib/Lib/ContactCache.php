@@ -10,11 +10,12 @@
  * @copyright Loic Blot 2014-2017
  */
 
+declare(strict_types=1);
+
 namespace OCA\OcSms\Lib;
 
-use \OCP\Contacts\IManager as IContactsManager;
-
-use \OCA\OcSms\Db\ConfigMapper;
+use OCP\Contacts\IManager as IContactsManager;
+use OCA\OcSms\Db\ConfigMapper;
 
 class ContactCache {
 	/**
@@ -105,7 +106,6 @@ class ContactCache {
 				
 				if (isset ($r["PHOTO"])) {
 					// Remove useless prefix
-					$ocversion = \OCP\Util::getVersion();
 					$photoURL = preg_replace("#^VALUE=uri:#","",$r["PHOTO"], 1);
 					$this->contactPhotos[$r["FN"]] = $photoURL;
 				}

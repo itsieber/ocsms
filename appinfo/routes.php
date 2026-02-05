@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Nextcloud - Phone Sync
  *
@@ -9,11 +12,7 @@
  * @copyright Loic Blot 2014-2017
  */
 
-namespace OCA\OcSms\AppInfo;
-
-$application = new OcSmsApp();
-
-$application->registerRoutes($this, array('routes' => array(
+return ['routes' => [
 	array('name' => 'sms#index', 'url' => '/', 'verb' => 'GET'),
 	array('name' => 'sms#delete_conversation', 'url' => '/delete/conversation', 'verb' => 'POST'),
 	array('name' => 'sms#delete_message', 'url' => '/delete/message', 'verb' => 'POST'),
@@ -47,5 +46,5 @@ $application->registerRoutes($this, array('routes' => array(
 
 	// Android API v4
 	// @TODO future calls to sending calls recorded on the phone
-	array('name' => 'api#fetch_messages_to_send', 'url' => '/api/v4/messages/sendqueue', 'verb' => 'GET'), // Android APIv3
-)));
+	['name' => 'api#fetch_messages_to_send', 'url' => '/api/v4/messages/sendqueue', 'verb' => 'GET'], // Android APIv3
+]];

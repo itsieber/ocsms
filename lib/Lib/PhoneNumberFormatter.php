@@ -10,12 +10,11 @@
  * @copyright Loic Blot 2014-2017
  */
 
+declare(strict_types=1);
+
 namespace OCA\OcSms\Lib;
 
-use \OCA\OcSms\Lib\CountryCodes;
-
-// Load the PhoneNumberUtil class and dependencies.
-include( dirname(__FILE__) . '/vendor/autoload.php');
+require_once __DIR__ . '/../vendor/autoload.php';
 
 class PhoneNumberFormatter {
 	public static function format ($country, $pn) {

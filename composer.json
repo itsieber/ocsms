@@ -1,0 +1,14 @@
+{
+    "name": "nextcloud/ocsms",
+    "description": "Phone Sync - An app to sync SMS with your cloud",
+    "type": "project",
+    "license": "AGPL-3.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "OCA\\OcSms\\": "lib/"
+        }
+    },
+    "require": {
+        "php": "^8.1"
+    }
+}
