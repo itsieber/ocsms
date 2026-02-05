@@ -52,12 +52,14 @@ var ContactRenderer = {
 			var hsl = input.toHsl();
 			return 'hsl(' + hsl[0] + ', ' + hsl[1] + '%, ' + hsl[2] + '%)';
 		} else {
-			// If not, we use the old one
-			/* global md5 */
-			var hash = md5(input).substring(0, 4),
-				maxRange = parseInt('ffff', 16),
-				hue = parseInt(hash, 16) / maxRange * 256;
-			return 'hsl(' + hue + ', 90%, 65%)';
+			// Simple string hash for color generation
+			var hash = 0;
+			var str = String(input);
+			for (var i = 0; i < str.length; i++) {
+				hash = str.charCodeAt(i) + ((hash << 5) - hash);
+			}
+			var hue = Math.abs(hash) % 360;
+			return 'hsl(' + hue + ', 70%, 60%)';
 		}
 	},
 	generateFirstCharacter: function (input) {
