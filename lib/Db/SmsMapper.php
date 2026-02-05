@@ -280,6 +280,24 @@ class SmsMapper {
 	}
 
 	public function getLastMessageTimestampForAllPhonesNumbers(string $userId, bool $order = true): array {
+		// Debug: Log total count for user without mailbox filter
+		$qbDebug = $this->db->getQueryBuilder();
+		$qbDebug->selectAlias($qbDebug->createFunction('COUNT(*)'), 'cnt')
+			->from('ocsms_smsdatas')
+			->where($qbDebug->expr()->eq('user_id', $qbDebug->createNamedParameter($userId)));
+		$debugResult = $qbDebug->executeQuery();
+		$debugRow = $debugResult->fetch();
+		$debugResult->closeCursor();
+		\OC::$server->getLogger()->warning("OCSMS Debug: Total SMS for user '$userId' = " . ($debugRow ? $debugRow['cnt'] : 'N/A'));
+		
+		// Debug: Check total SMS in DB
+		$qbDebug2 = $this->db->getQueryBuilder();
+		$qbDebug2->selectAlias($qbDebug2->createFunction('COUNT(*)'), 'cnt')->from('ocsms_smsdatas');
+		$debugResult2 = $qbDebug2->executeQuery();
+		$debugRow2 = $debugResult2->fetch();
+		$debugResult2->closeCursor();
+		\OC::$server->getLogger()->warning("OCSMS Debug: Total SMS in DB = " . ($debugRow2 ? $debugRow2['cnt'] : 'N/A'));
+		
 		$qb = $this->db->getQueryBuilder();
 		$qb->selectAlias($qb->createFunction('MAX(sms_date)'), 'mx')
 			->addSelect('sms_address')
