@@ -12,15 +12,15 @@ declare(strict_types=1);
  * @copyright Loic Blot 2014-2017
  */
 
-namespace OCA\OcSms\Controller;
+namespace OCA\Ocsms\Controller;
 
 use OCP\IRequest;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http;
 
-use OCA\OcSms\Db\ConfigMapper;
-use OCA\OcSms\Lib\CountryCodes;
+use OCA\Ocsms\Db\ConfigMapper;
+use OCA\Ocsms\Lib\CountryCodes;
 
 class SettingsController extends Controller {
 	private ConfigMapper $configMapper;

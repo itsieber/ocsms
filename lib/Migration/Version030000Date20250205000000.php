@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OCA\OcSms\Migration;
+namespace OCA\Ocsms\Migration;
 
 use Closure;
 use OCP\DB\ISchemaWrapper;

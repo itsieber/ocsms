@@ -21,7 +21,7 @@
 
 declare(strict_types=1);
 
-namespace OCA\OcSms\Lib;
+namespace OCA\Ocsms\Lib;
 
 class CountryCodes {
 	public static $codes = array(

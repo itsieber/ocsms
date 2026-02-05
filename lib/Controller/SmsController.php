@@ -12,7 +12,7 @@ declare(strict_types=1);
  * @copyright Loic Blot 2014-2017
  */
 
-namespace OCA\OcSms\Controller;
+namespace OCA\Ocsms\Controller;
 
 use OCP\IRequest;
 use OCP\IURLGenerator;
@@ -22,11 +22,11 @@ use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http;
 
-use OCA\OcSms\Db\ConfigMapper;
-use OCA\OcSms\Db\SmsMapper;
-use OCA\OcSms\Db\ConversationStateMapper;
-use OCA\OcSms\Lib\ContactCache;
-use OCA\OcSms\Lib\PhoneNumberFormatter;
+use OCA\Ocsms\Db\ConfigMapper;
+use OCA\Ocsms\Db\SmsMapper;
+use OCA\Ocsms\Db\ConversationStateMapper;
+use OCA\Ocsms\Lib\ContactCache;
+use OCA\Ocsms\Lib\PhoneNumberFormatter;
 
 class SmsController extends Controller {
 	private ?string $userId;

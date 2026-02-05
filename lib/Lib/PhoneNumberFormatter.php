@@ -12,7 +12,7 @@
 
 declare(strict_types=1);
 
-namespace OCA\OcSms\Lib;
+namespace OCA\Ocsms\Lib;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 

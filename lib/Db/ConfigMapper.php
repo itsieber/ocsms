@@ -12,7 +12,7 @@ declare(strict_types=1);
  * @copyright Loic Blot 2014-2017
  */
 
-namespace OCA\OcSms\Db;
+namespace OCA\Ocsms\Db;
 
 use OCP\IDBConnection;
 use OCP\Security\ICrypto;

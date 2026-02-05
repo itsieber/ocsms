@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 // Register autoloader for OCA\OcSms namespace
 spl_autoload_register(function ($className) {
-    $prefix = 'OCA\\OcSms\\';
+    $prefix = 'OCA\\Ocsms\\';
     $baseDir = __DIR__ . '/../lib/';
 
     $len = strlen($prefix);

@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/../../appinfo/autoload.php';
-
 /**
  * Nextcloud - Phone Sync
  *
@@ -14,7 +12,7 @@ require_once __DIR__ . '/../../appinfo/autoload.php';
  * @copyright Loic Blot 2014-2016
  */
 
-namespace OCA\OcSms\AppInfo;
+namespace OCA\Ocsms\AppInfo;
 
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
@@ -24,9 +22,9 @@ use OCP\IDBConnection;
 use OCP\Security\ICrypto;
 use Psr\Container\ContainerInterface;
 
-use OCA\OcSms\Db\ConfigMapper;
-use OCA\OcSms\Db\ConversationStateMapper;
-use OCA\OcSms\Db\SmsMapper;
+use OCA\Ocsms\Db\ConfigMapper;
+use OCA\Ocsms\Db\ConversationStateMapper;
+use OCA\Ocsms\Db\SmsMapper;
 
 class Application extends App implements IBootstrap {
 	public const APP_ID = 'ocsms';

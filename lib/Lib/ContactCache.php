@@ -12,10 +12,10 @@
 
 declare(strict_types=1);
 
-namespace OCA\OcSms\Lib;
+namespace OCA\Ocsms\Lib;
 
 use OCP\Contacts\IManager as IContactsManager;
-use OCA\OcSms\Db\ConfigMapper;
+use OCA\Ocsms\Db\ConfigMapper;
 
 class ContactCache {
 	/**

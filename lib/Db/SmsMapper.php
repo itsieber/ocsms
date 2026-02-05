@@ -12,10 +12,10 @@ declare(strict_types=1);
  * @copyright Loic Blot 2014-2017
  */
 
-namespace OCA\OcSms\Db;
+namespace OCA\Ocsms\Db;
 
 use OCP\IDBConnection;
-use OCA\OcSms\Lib\PhoneNumberFormatter;
+use OCA\Ocsms\Lib\PhoneNumberFormatter;
 
 class SmsMapper {
 	private static array $mailboxNames = [0 => 'inbox', 1 => 'sent', 2 => 'drafts'];

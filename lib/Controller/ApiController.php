@@ -12,14 +12,14 @@ declare(strict_types=1);
  * @copyright Loic Blot 2014-2017
  */
 
-namespace OCA\OcSms\Controller;
+namespace OCA\Ocsms\Controller;
 
 use OCP\IRequest;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\JSONResponse;
 
-use OCA\OcSms\Db\SmsMapper;
+use OCA\Ocsms\Db\SmsMapper;
 
 class ApiController extends Controller {
 	private ?string $userId;
