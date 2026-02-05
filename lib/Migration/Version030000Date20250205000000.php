@@ -152,9 +152,8 @@ class Version030000Date20250205000000 extends SimpleMigrationStep {
 				'notnull' => true,
 				'length' => 255,
 			]);
-			$table->addColumn('value', 'string', [
+			$table->addColumn('value', 'text', [
 				'notnull' => false,
-				'length' => 10240,
 			]);
 			$table->addIndex(['user', 'key'], 'config_user_key');
 		}
