@@ -23,7 +23,7 @@
 
     <repair-steps>
         <post-migration>
-            <step>OCA\OcSms\Migration\FixConversationReadStates</step>
+            <step>OCA\Ocsms\Migration\FixConversationReadStates</step>
         </post-migration>
     </repair-steps>
 		<navigations>
