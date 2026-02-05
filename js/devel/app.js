@@ -84,6 +84,22 @@ $.urlParam = function (name) {
 };
 
 Vue.filter('firstCharacter', ContactRenderer.generateFirstCharacter);
+Vue.filter('date', function(value, format) {
+	if (!value) return '';
+	var date = value instanceof Date ? value : new Date(value);
+	if (isNaN(date.getTime())) return '';
+	
+	// Simple date formatting
+	var options = {};
+	if (format === 'medium') {
+		options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+	} else if (format === 'short') {
+		options = { year: '2-digit', month: 'numeric', day: 'numeric' };
+	} else {
+		options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+	}
+	return date.toLocaleString(undefined, options);
+});
 const Dialog = Vue.extend({
 	template: '#modal-template'
 });
