@@ -18,6 +18,8 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 class PhoneNumberFormatter {
 	public static function format ($country, $pn) {
+		// Ensure phone number is a string
+		$pn = (string)$pn;
 		// Trim the phone number.
 		$pn = trim($pn);
 
