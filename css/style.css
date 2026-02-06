@@ -91,6 +91,22 @@ body.dark #app {
 	flex: 1;
 	overflow-y: auto;
 	height: calc(100vh - 50px);
+	display: flex;
+	flex-direction: column;
+}
+
+#app-content-wrapper {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+}
+
+.ocsms-messages-container {
+	flex: 1;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
 }
 
 #app-content-wrapper {
@@ -234,37 +250,46 @@ body.dark #app {
         width: 100%;
 }
 
-#ocsms-send-container {
-	display: flex;
-	padding: 10px;
-	background-color: #f5f5f5;
-	border-top: 1px solid #ddd;
-	position: sticky;
-	bottom: 0;
-	gap: 10px;
+/* Compose message bubble */
+.msg-compose {
+	float: right;
+	clear: both;
+	max-width: 60%;
+	min-width: 250px;
 }
 
 #ocsms-send-message {
-	flex: 1;
-	min-height: 40px;
-	max-height: 120px;
-	padding: 10px;
-	border: 1px solid #ccc;
+	width: 100%;
+	min-height: 60px;
+	max-height: 150px;
+	padding: 8px;
+	border: 1px solid #8bc58b;
 	border-radius: 4px;
 	resize: vertical;
 	font-family: inherit;
 	font-size: inherit;
+	box-sizing: border-box;
+	background: #fff;
 }
 
 #ocsms-send-message:focus {
-	border-color: #0082c9;
+	border-color: #5a9a5a;
 	outline: none;
+}
+
+.msg-compose-actions {
+	margin-top: 8px;
+	text-align: right;
 }
 
 #ocsms-send-button {
 	min-width: 80px;
-	height: 40px;
-	align-self: flex-end;
+	height: 32px;
+}
+
+#ocsms-send-button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
 }
 
 .msg-spacer {

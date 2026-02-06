@@ -140,13 +140,16 @@ use \OCA\Ocsms\Lib\CountryCodes;
 					<div class="msg-spacer"></div>
 				</div>
 			</div>
-			<div v-if="messages.length > 0" id="ocsms-send-container">
+			<div v-if="selectedContact.nav" class="msg-sent msg-compose">
 				<textarea id="ocsms-send-message" v-model="newMessage" :placeholder="'<?php p($l->t('Type a message...'));?>'" @keydown.enter.exact.prevent="sendMessage()"></textarea>
-				<button id="ocsms-send-button" class="primary" v-on:click="sendMessage()" :disabled="isSending">
-					<span v-if="!isSending"><?php p($l->t('Send'));?></span>
-					<span v-if="isSending" class="icon-loading-small"></span>
-				</button>
+				<div class="msg-compose-actions">
+					<button id="ocsms-send-button" class="primary" v-on:click="sendMessage()" :disabled="isSending || newMessage.trim() === ''">
+						<span v-if="!isSending"><?php p($l->t('Send'));?></span>
+						<span v-if="isSending" class="icon-loading-small"></span>
+					</button>
+				</div>
 			</div>
+			<div class="msg-spacer"></div>
 		</div>
 	</div>
 </div>

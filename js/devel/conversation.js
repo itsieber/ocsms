@@ -195,6 +195,7 @@ var Conversation = new Vue({
 			}
 
 			this.isSending = true;
+			var sentMessage = message;
 
 			$.post(Sms.generateURL('/front-api/v1/send'),
 				{
@@ -205,6 +206,18 @@ var Conversation = new Vue({
 					self.isSending = false;
 					if (data.status === 'ok') {
 						self.newMessage = '';
+						// Add message to conversation immediately as "sent" (pending)
+						var now = Date.now();
+						var twemojiOptions = { base: OC.generateUrl('/apps/ocsms/js/twemoji/')};
+						self.addConversationMessage({
+							'id': now,
+							'type': 'sent',
+							'date': new Date(now),
+							'content': twemoji.parse(anchorme(escapeHTML(sentMessage)), twemojiOptions),
+							'pending': true
+						});
+						self.totalMessageCount++;
+						$('#app-content').scrollTop(0);
 					}
 				}
 			).fail(function () {
@@ -214,6 +227,7 @@ var Conversation = new Vue({
 	},
 	computed: {
 		orderedMessages: function () {
+			// Neueste oben, älteste unten
 			return _.orderBy(this.messages, ['date'], ['desc'])
 		}
 	}
