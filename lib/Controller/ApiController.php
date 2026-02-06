@@ -196,7 +196,17 @@ class ApiController extends Controller {
 	 * @NoCSRFRequired
 	 */
 	public function fetchMessagesToSend(): JSONResponse {
-		return new JSONResponse(['messages' => []]);
+		$messages = $this->sendQueueMapper->getMessagesForUser($this->userId ?? '');
+		return new JSONResponse(['messages' => $messages]);
+	}
+
+	/**
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 */
+	public function ackSentMessage(int $id): JSONResponse {
+		$this->sendQueueMapper->deleteMessage($this->userId ?? '', $id);
+		return new JSONResponse(['status' => 'ok']);
 	}
 
 	/**

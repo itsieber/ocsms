@@ -47,5 +47,6 @@ return ['routes' => [
 
 	// Android API v4
 	// @TODO future calls to sending calls recorded on the phone
-	['name' => 'api#fetch_messages_to_send', 'url' => '/api/v4/messages/sendqueue', 'verb' => 'GET'], // Android APIv3
+	['name' => 'api#fetch_messages_to_send', 'url' => '/api/v4/messages/sendqueue', 'verb' => 'GET'],
+	['name' => 'api#ack_sent_message', 'url' => '/api/v4/messages/sendqueue/{id}', 'verb' => 'DELETE'],
 ]];
